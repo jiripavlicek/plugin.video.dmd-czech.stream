@@ -192,7 +192,7 @@ def VIDEOLINK(url,name):
     data = getJsonDataFromUrl(url)
     name = data[u'name']
     thumb = makeImageUrl(data[u'image'])
-    popis = data[u'detail']
+    popis = re.sub("<.*?>", "", data[u'detail'])
     logDbg(url)
     for item in data[u'video_qualities']:
         try:
@@ -215,7 +215,7 @@ def RESOLVE_VIDEOLINK(url,name):
     data = getJsonDataFromUrl(url)
     name = data[u'name']
     thumb = makeImageUrl(data[u'image'])
-    popis = data[u'detail']
+    popis = re.sub("<.*?>", "", data[u'detail'])
     qa = []
     logDbg("Resolving video URL for quality " + quality_settings[quality_index] + " from: " + url)
     for item in data[u'video_qualities']:
